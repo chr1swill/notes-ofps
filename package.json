@@ -1,0 +1,16 @@
+{
+  "type": "module",
+  "name": "notes-opfs",
+  "version": "1.0.0",
+  "description": "Testing out what it would be like to have a browser based notes app that used ofps as it's data storage",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "typescript": "^5.5.4"
+  }
+}
