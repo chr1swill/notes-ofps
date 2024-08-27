@@ -21,6 +21,7 @@ self.onmessage = function(e) {
         }).then(function(syncAccessHandle) {
             syncAccessHandle.write(textEncoder.encode(message.content), { at: 0 });
             syncAccessHandle.flush();
+            self.postMessage({ type: opfsWorkerMessage.WRITE });
             syncAccessHandle.close();
         }).catch(function(err) {
             console.error(err);

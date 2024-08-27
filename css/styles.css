@@ -6,17 +6,38 @@
 body {
     width: 100svw;
     height: 100svh;
+    margin: 0px;
     overflow: hidden;
     background-color: black;
     color: white;
 }
 
-h1 {}
+.text_display_section {
+    width: 100svw;
+    height: 10svh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+h1 {
+    color: white;
+}
+
+.note_state_message {
+    width: auto;
+    height: 16px;
+    color: white;
+    font-size: 16px;
+    font-weight: medium;
+}
 
 .note_text_input {
     width: 100svw;
-    height: 100svh;
+    height: 90svh;
     background-color: black;
     color: white;
     padding: 8px;
+    margin: 0px
 }
+
