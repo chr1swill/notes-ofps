@@ -2,3 +2,21 @@
     display: none;
     visibility: none;
 }
+
+body {
+    width: 100svw;
+    height: 100svh;
+    overflow: hidden;
+    background-color: black;
+    color: white;
+}
+
+h1 {}
+
+.note_text_input {
+    width: 100svw;
+    height: 100svh;
+    background-color: dark-gray;
+    color: white;
+    padding: 8px;
+}
