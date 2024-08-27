@@ -14,7 +14,7 @@ body {
 
 .text_display_section {
     width: 100svw;
-    height: 10svh;
+    height: 5svh;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -34,7 +34,7 @@ h1 {
 
 .note_text_input {
     width: 100svw;
-    height: 90svh;
+    height: 95svh;
     background-color: black;
     color: white;
     padding: 8px;
