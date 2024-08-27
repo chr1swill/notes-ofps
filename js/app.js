@@ -2,7 +2,7 @@ import { opfsWorkerMessage } from "./globals.js";
 
 class DebounceWriteMessage {
     /**@type{Readonly<number>}*/
-    #debounceTime = 5000;
+    #debounceTime = 3000;
 
     /**@type{number}*/
     #timeout = -1;
