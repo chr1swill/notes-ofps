@@ -7,11 +7,37 @@
     <script src="./js/app.js" type="module"></script>
 </head>
 <body>
-    <section class="text_display_section">
-        <h1 id="note_file_name"></h1>
-        <span id="note_state_message" class="note_state_message"></span>
-    </section>
-    <label for="note_text_input" class="hidden"></label>
-    <textarea id="note_text_input" name="note_text_input" class="note_text_input"></textarea>
+    <nav class="text_display_section">
+        <h1 id="note_file_name" class="h1">OFSP Notes</h1>
+    </nav>
+    <main class="main_content_area">
+        <section id="folders_section" class="grid_section">
+            <ul id="folder_list_container">
+            </ul>
+            <button id="button_new_folder" title="New Folder">New Folder</button>
+        </section>
+        <section id="note_list_section" class="grid_section">
+            <header class="note_list_section_header">
+                <label for="input_search_for_note" class="hidden">Search for text inside a note.</label>
+                <input type="search" id="input_search_for_note" name="input_search_for_note" placeholder="Search all notes" class="input_search_for_note">
+            </header>
+            <ul id="notes_list_container">
+            </ul>
+        </section>
+        <section id="note_section" class="grid_section">
+            <header class="note_section_header">
+                <div>
+                    <button id="button_delete_note" title="Delete note">Delete note</button>
+                </div>
+                <div></div>
+                <div>
+                    <span id="note_state_message" class="note_state_message"></span>
+                    <button id="button_create_note" title="Create note">Create note</button>
+                </div>
+            </header>
+            <label for="note_text_input" class="hidden">Input the text you would like saved to the note.</label>
+            <textarea id="note_text_input" name="note_text_input" class="note_text_input"></textarea>
+        </section>
+    </main>
 </body>
 </html>
