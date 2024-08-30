@@ -1,5 +1,20 @@
-html, body {
-    box-sizing: border-box;
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+html {
+  color-scheme: light dark;
 }
 
 body {
@@ -14,9 +29,9 @@ body {
 .text_display_section {
     width: 100svw;
     height: 5svh;
-    /*display: flex;
-    justify-content: space-around;*/
+    display: flex;
     align-items: center;
+    padding: 8px;
 }
 
 .h1 {
@@ -29,7 +44,6 @@ body {
     display: none;
     visibility: none;
 }
-
 
 .main_content_area {
     width: 100svw;
