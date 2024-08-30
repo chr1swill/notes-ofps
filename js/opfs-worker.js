@@ -92,7 +92,7 @@ self.onmessage = function(e) {
             });
         }).then(function(syncAccessHandle) {
             const content = syncFileHandler.read(syncAccessHandle, 0);
-            console.assert(content === undefined, "Failed to read data from the sync access handler");
+            console.assert(content !== undefined, "Failed to read data from the sync access handler: ", content);
             self.postMessage({ type: opfsWorkerMessage.READ, content: content === undefined ? "" : content });
             syncAccessHandle.close();
         }).catch(function(err) {
