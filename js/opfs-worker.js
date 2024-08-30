@@ -1,7 +1,62 @@
 import { opfsWorkerMessage } from "./globals.js";
 
-const textEncoder = new TextEncoder();
-const textDecoder = new TextDecoder();
+class SyncFileHandler {
+    #textEncoder;
+    #textDecoder;
+
+    /**
+     * @param{TextEncoder | undefined} [textEncoder=undefined]
+     * @param{TextDecoder | undefined} [textDecoder=undefined]
+     */
+    constructor(textEncoder = undefined, textDecoder = undefined) {
+        if (textEncoder instanceof TextEncoder) {
+            this.#textEncoder = textEncoder;
+        } else {
+            this.#textEncoder = new TextEncoder();
+        };
+
+        if (textDecoder instanceof TextDecoder) {
+            this.#textDecoder = textDecoder;
+        } else {
+            this.#textDecoder = new TextDecoder();
+        };
+    };
+
+
+    /**
+     * @param {*} syncAccessHandle - type is FileSystemSyncAccessHandle
+     * @param {string} content
+     * @param {number} [offset=0]
+     * @return {void}
+     */
+    write(syncAccessHandle, content, offset = 0) {
+        try {
+            syncAccessHandle.write(this.#textEncoder.encode(content), { at: offset });
+            syncAccessHandle.flush()
+        } catch (err) {
+            console.error(err);
+        }; 
+    };
+
+    /**
+     * @param {*} syncAccessHandle - type is FileSystemSyncAccessHandle
+     * @param {number} [offset=0]
+     * @return {string | undefined}
+     */
+    read(syncAccessHandle, offset = 0) {
+        try {
+            const size = syncAccessHandle.getSize();
+            const buffer = new ArrayBuffer(size);
+            syncAccessHandle.read(buffer, { at: offset }); 
+            return this.#textDecoder.decode(buffer);
+        } catch (err) {
+            console.error(err);
+            return;
+        };
+    };
+};
+
+const syncFileHandler = new SyncFileHandler();
 
 self.onerror = function(e) {
     console.error(e);
@@ -19,8 +74,7 @@ self.onmessage = function(e) {
                 resolve(fileHandle.createSyncAccessHandle());
             });
         }).then(function(syncAccessHandle) {
-            syncAccessHandle.write(textEncoder.encode(message.content), { at: 0 });
-            syncAccessHandle.flush();
+            syncFileHandler.write(syncAccessHandle, message.content, 0);
             self.postMessage({ type: opfsWorkerMessage.WRITE });
             syncAccessHandle.close();
         }).catch(function(err) {
@@ -37,15 +91,14 @@ self.onmessage = function(e) {
                 resolve(fileHandle.createSyncAccessHandle());
             });
         }).then(function(syncAccessHandle) {
-            const size = syncAccessHandle.getSize();
-            const buffer = new ArrayBuffer(size);
-            syncAccessHandle.read(buffer, { at: 0 });
-            self.postMessage({ type: opfsWorkerMessage.READ, content: textDecoder.decode(buffer) });
+            const content = syncFileHandler.read(syncAccessHandle, 0);
+            console.assert(content === undefined, "Failed to read data from the sync access handler");
+            self.postMessage({ type: opfsWorkerMessage.READ, content: content === undefined ? "" : content });
             syncAccessHandle.close();
         }).catch(function(err) {
             console.error(err);
         });
-    } else  {
+    } else {
         console.error("No handler has been set up for provided message type: ", message.type);
         return;
     };
