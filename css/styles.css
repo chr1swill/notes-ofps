@@ -113,3 +113,26 @@ body {
     margin: 0px
 }
 
+.icon_more_info {
+    --icon-color-foreground: rgb(128, 128, 128);
+    --icon-color-background: rgb(0, 0, 0);
+    display: inline-block;
+    cursor: pointer;
+}
+
+.icon_more_info:hover {
+    --icon-color-foreground: rgb(0, 0, 0);
+    --icon-color-background: rgb(128, 128, 128);
+}
+
+.icon_folder {
+    --icon-color-stroke: rgb(0, 0, 0);
+    --icon-color-background: rgb(128, 128, 128);
+    display: inline-block;
+    cursor: pointer;
+}
+
+.icon_folder:hover {
+    --icon-color-stroke: rgb(128, 128, 128);
+    --icon-color-background: rgb(0, 0, 0);
+}
