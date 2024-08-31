@@ -136,3 +136,8 @@ body {
     --icon-color-stroke: rgb(128, 128, 128);
     --icon-color-background: rgb(0, 0, 0);
 }
+
+.folder_list_item__container {}
+.folder_list_item__folder_icon {}
+.folder_list_item__folder_title {}
+.folder_list_item__more_info_button {}

@@ -76,6 +76,7 @@ class FolderListItem {
         span.appendChild(p);
 
         const button = document.createElement("button");
+        button.classList.add("folder_list_item__more_info_button");
         button.appendChild(IconMoreInfoComponent());
 
         li.appendChild(span);
