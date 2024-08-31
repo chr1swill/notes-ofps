@@ -1,4 +1,5 @@
 import { opfsWorkerMessage } from "./globals.js";
+import { FolderListContainer } from "./components/FolderListContainer.js";
 
 class DebounceWriteMessage {
     /**@type{Readonly<number>}*/
@@ -160,16 +161,17 @@ function main() {
         };
     };
 
-    window.onload = function() {
-        opfsWorker.postMessage({ type: opfsWorkerMessage.READ });
-    };
-
     noteTextInput.oninput = function() {
         if (noteStateMessageUpdater.getCurrentState() !== noteStateMessageUpdater.EDITED) {
             noteStateMessageUpdater.edited();
         };
 
         writeMessageDebouncer.run();
+    };
+
+    window.onload = function() {
+        opfsWorker.postMessage({ type: opfsWorkerMessage.READ });
+        new FolderListContainer().renderList();
     };
 };
 main();

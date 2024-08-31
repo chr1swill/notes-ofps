@@ -1,7 +1,7 @@
 import { AsyncStorageHandler } from '../storage.js';
 import { toSnakeCase } from '../globals.js'
 
-class FolderListContainer {
+export class FolderListContainer {
 
     constructor() {
         const ulElement = document.getElementById("folder_list_container");
@@ -18,9 +18,9 @@ class FolderListContainer {
         const fragment = new DocumentFragment();
 
         return new Promise(function(resolve) {
-            return resolve(that.storageHandler.getAllRootDirectories());
+            resolve(that.storageHandler.getAllRootDirectories());
         }).then(function(arrayOfDirectoryNames) {
-            while (arrayOfDirectoryNames.length < 0) {
+            while (arrayOfDirectoryNames.length > 0) {
                 const folderListItem = new FolderListItem(arrayOfDirectoryNames[arrayOfDirectoryNames.length - 1]);
                 fragment.prepend(folderListItem.getElement())
                 arrayOfDirectoryNames.pop();
